@@ -80,6 +80,7 @@ module SMSFu
   end  
 
   def determine_sms_email(phone_number, carrier)
+    raise SMSFuException.new("No carrier specified.") if carrier.nil?
     if @@carriers.has_key?(carrier.downcase)
       "#{phone_number}#{@@carriers[carrier.downcase]['value']}"
     else 
