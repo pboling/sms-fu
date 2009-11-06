@@ -42,7 +42,7 @@ module SMSFu
   @@from_address = @config['config']['from_address']
 
   def self.carrier_name(key)
-    carriers[key]['name']
+    carriers[key]['name'] unless carriers[key].nil?
   end
 
   def self.carriers
