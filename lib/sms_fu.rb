@@ -50,7 +50,9 @@ module SMSFu
   end
 
   def deliver_sms(number,carrier,message,options={})
-    raise SMSFuException.new("Cannot deliver an empty message to #{format_number(number)}") if message.nil? or message.empty?
+    raise SMSFuException.new("Cannot deliver an empty message to #{format_number(number)}") if message.blank?
+    raise SMSFuException.new("Missing carrier. Cannot deliver to #{format_number(number)}") if carrier.blank?
+    raise SMSFuException.new("Missing number for carrier #{carrier}. Cannot deliver.") if number.blank?
 
     options[:limit] ||= message.length
     options[:from]  ||= @@from_address
